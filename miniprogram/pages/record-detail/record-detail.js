@@ -30,6 +30,15 @@ Page({
   editRecord() {
     wx.navigateTo({ url: `/pages/record-edit/record-edit?id=${this.data.id}` })
   },
+  previewImage() {
+    const record = this.data.record || {}
+    const images = record.originalImages && record.originalImages.length ? record.originalImages : record.images || []
+    if (!images.length) return
+    wx.previewImage({
+      current: images[0],
+      urls: images,
+    })
+  },
   deleteRecord() {
     wx.showModal({
       title: '删除记录',

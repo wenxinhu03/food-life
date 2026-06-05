@@ -65,8 +65,44 @@ Page({
       sourceType: ['album', 'camera'],
       success: (result) => {
         const firstFile = result.tempFiles[0]
-        if (firstFile) this.setData({ 'record.images': [firstFile.tempFilePath] })
+        if (!firstFile) return
+
+        const originalPath = firstFile.tempFilePath
+        if (typeof wx.cropImage !== 'function') {
+          this.setData({
+            'record.images': [originalPath],
+            'record.originalImages': [originalPath],
+          })
+          return
+        }
+
+        wx.cropImage({
+          src: originalPath,
+          cropScale: '16:9',
+          success: (cropResult) => {
+            this.setData({
+              'record.images': [cropResult.tempFilePath],
+              'record.originalImages': [originalPath],
+            })
+          },
+          fail: () => {
+            this.setData({
+              'record.images': [originalPath],
+              'record.originalImages': [originalPath],
+            })
+          },
+        })
       },
+    })
+  },
+  previewImage() {
+    const images = (this.data.record.originalImages && this.data.record.originalImages.length)
+      ? this.data.record.originalImages
+      : this.data.record.images || []
+    if (!images.length) return
+    wx.previewImage({
+      current: images[0],
+      urls: images,
     })
   },
   generateComment() {

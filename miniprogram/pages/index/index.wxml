@@ -1,4 +1,15 @@
 <view class="page-shell index-page">
+  <view class="brand-header">
+    <view class="brand-mark">
+      <view class="star-core"></view>
+      <view class="star-orbit"></view>
+    </view>
+    <view class="brand-copy">
+      <text class="brand-title">昏星味道日记</text>
+      <text class="brand-subtitle">把今天的味道收进口袋</text>
+    </view>
+  </view>
+
   <view class="date-row">
     <view class="date-icon" bindtap="goPrevDate">‹</view>
     <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
@@ -14,6 +25,33 @@
     <text class="eyebrow">Daily Food Notes</text>
     <text class="title">今天吃了什么？</text>
     <text class="subtitle">记录一口好味道</text>
+  </view>
+
+  <view class="search-card">
+    <text class="search-icon">⌕</text>
+    <input class="search-input" value="{{searchKeyword}}" placeholder="搜索食物名称" confirm-type="search" bindinput="onSearchInput" />
+    <view wx:if="{{searchKeyword}}" class="search-clear" bindtap="clearSearch">×</view>
+  </view>
+
+  <view wx:if="{{searchKeyword}}" class="search-results">
+    <view class="search-result-title">
+      <text>搜索结果</text>
+      <text>{{searchResults.length}} 条</text>
+    </view>
+    <view wx:if="{{searchResults.length === 0}}" class="search-empty">没有匹配到食物名称</view>
+    <view
+      wx:for="{{searchResults}}"
+      wx:key="id"
+      class="search-result-item"
+      data-id="{{item.id}}"
+      bindtap="openSearchResult"
+    >
+      <view class="search-result-main">
+        <text class="search-food-name">{{item.foodName}}</text>
+        <text class="search-meta">{{item.dateLabel}} · {{item.mealLabel}}</text>
+      </view>
+      <text class="search-stars">{{item.starText}}</text>
+    </view>
   </view>
 
   <view class="food-hero-card">

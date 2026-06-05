@@ -10,6 +10,8 @@ Page({
     recordCount: 0,
     averageRating: '0.0',
     savedSummary: '',
+    searchKeyword: '',
+    searchResults: [],
   },
   onLoad() {
     this.loadDate(this.data.selectedDate)
@@ -63,6 +65,40 @@ Page({
   },
   openSummary() {
     wx.navigateTo({ url: `/pages/ai-summary/ai-summary?date=${this.data.selectedDate}` })
+  },
+  onSearchInput(event) {
+    const keyword = String(event.detail.value || '').trim()
+    if (!keyword) {
+      this.setData({
+        searchKeyword: '',
+        searchResults: [],
+      })
+      return
+    }
+
+    const lowerKeyword = keyword.toLowerCase()
+    const searchResults = store.getRecords()
+      .filter((record) => record.foodName.toLowerCase().includes(lowerKeyword))
+      .map((record) => Object.assign({}, record, {
+        mealLabel: store.getMealLabel(record.mealType),
+        starText: store.getStarText(record.rating),
+        dateLabel: store.formatDisplayDate(record.date),
+      }))
+      .slice(0, 12)
+
+    this.setData({
+      searchKeyword: keyword,
+      searchResults,
+    })
+  },
+  clearSearch() {
+    this.setData({
+      searchKeyword: '',
+      searchResults: [],
+    })
+  },
+  openSearchResult(event) {
+    wx.navigateTo({ url: `/pages/record-detail/record-detail?id=${event.currentTarget.dataset.id}` })
   },
   quickSummary() {
     const summary = store.buildLocalSummary(this.data.selectedDate, this.data.records)

@@ -1,6 +1,6 @@
 <view wx:if="{{record}}" class="detail-page">
   <view class="hero-card">
-    <image wx:if="{{record.images.length}}" class="hero-image" src="{{record.images[0]}}" mode="aspectFill"></image>
+    <image wx:if="{{record.images.length}}" class="hero-image" src="{{record.images[0]}}" mode="aspectFill" bindtap="previewImage"></image>
     <view wx:else class="hero-cover">
       <view class="big-dish">
         <view class="big-food"></view>

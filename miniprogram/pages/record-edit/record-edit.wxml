@@ -1,11 +1,18 @@
 <view class="page-shell edit-page">
-  <view class="header-card" bindtap="chooseImage">
-    <image wx:if="{{record.images.length}}" class="food-image" src="{{record.images[0]}}" mode="aspectFill"></image>
-    <view wx:else class="dish-art">
-      <view class="dish-plate"></view>
-      <view class="dish-food"></view>
-      <view class="dish-dot dot-one"></view>
-      <view class="dish-dot dot-two"></view>
+  <view class="header-card">
+    <view wx:if="{{record.images.length}}" class="image-preview" bindtap="previewImage">
+      <image class="food-image" src="{{record.images[0]}}" mode="aspectFill"></image>
+      <view class="image-tip">展示图已裁剪 · 点击查看原图</view>
+      <view class="change-image" catchtap="chooseImage">重新裁剪</view>
+    </view>
+    <view wx:else class="image-placeholder" bindtap="chooseImage">
+      <view class="dish-art">
+        <view class="dish-plate"></view>
+        <view class="dish-food"></view>
+        <view class="dish-dot dot-one"></view>
+        <view class="dish-dot dot-two"></view>
+      </view>
+      <text class="upload-copy">添加食物图片</text>
     </view>
     <text class="header-title">{{isEdit ? '编辑记录' : '添加食物'}}</text>
     <text class="header-subtitle">写下今天这一口的味道</text>
@@ -61,7 +68,7 @@
 
     <view class="field">
       <text class="label">价格</text>
-      <input class="input" type="digit" value="{{record.price}}" placeholder="可选" bindinput="onPriceInput" />
+      <input class="input" type="text" value="{{record.price}}" placeholder="例如 18 元 / 朋友请客 / 免费" bindinput="onPriceInput" />
     </view>
   </view>
 
