@@ -1,0 +1,102 @@
+<view class="page-shell index-page">
+  <view class="date-row">
+    <view class="date-icon" bindtap="goPrevDate">‹</view>
+    <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text class="date-text">{{displayDate}}</text>
+        <text class="weekday-text">{{weekday}}</text>
+      </view>
+    </picker>
+    <view class="date-icon" bindtap="goNextDate">›</view>
+  </view>
+
+  <view class="hero-copy">
+    <text class="eyebrow">Daily Food Notes</text>
+    <text class="title">今天吃了什么？</text>
+    <text class="subtitle">记录一口好味道</text>
+  </view>
+
+  <view class="food-hero-card">
+    <view class="confetti tomato-one"></view>
+    <view class="confetti tomato-two"></view>
+    <view class="confetti leaf-one"></view>
+    <view class="confetti leaf-two"></view>
+    <view class="cartoon-plate">
+      <view class="plate-base"></view>
+      <view class="noodle noodle-a"></view>
+      <view class="noodle noodle-b"></view>
+      <view class="noodle noodle-c"></view>
+      <view class="sauce sauce-a"></view>
+      <view class="sauce sauce-b"></view>
+      <view class="fork"></view>
+    </view>
+    <view class="hero-badge">
+      <text>{{recordCount}}</text>
+      <text>records</text>
+    </view>
+  </view>
+
+  <view class="summary-card">
+    <view>
+      <text class="summary-label">今日概览</text>
+      <text class="summary-title">{{recordCount}} 条记录</text>
+    </view>
+    <view class="score-block">
+      <text class="score">{{averageRating}}</text>
+      <text class="score-label">平均分</text>
+    </view>
+    <view class="summary-actions">
+      <view class="secondary-button action-button" bindtap="goToday">今天</view>
+      <view class="secondary-button action-button" bindtap="quickSummary">AI 总结</view>
+    </view>
+  </view>
+
+  <view wx:if="{{savedSummary}}" class="ai-card" bindtap="openSummary">
+    <view class="ai-icon">AI</view>
+    <view class="ai-copy">
+      <text class="ai-title">今日饮食总结</text>
+      <text class="ai-text">{{savedSummary}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{recordCount === 0}}" class="empty-card">
+    <view class="empty-plate">
+      <view class="mini-dish">
+        <view class="mini-food"></view>
+        <view class="mini-dot dot-a"></view>
+        <view class="mini-dot dot-b"></view>
+      </view>
+    </view>
+    <text class="empty-title">今天还没有记录</text>
+    <text class="empty-text">从第一口开始记下来</text>
+    <view class="primary-button empty-button" bindtap="openAdd">添加食物</view>
+  </view>
+
+  <block wx:for="{{mealGroups}}" wx:key="key">
+    <view class="meal-section">
+      <view class="section-head">
+        <text class="section-title">{{item.label}}</text>
+        <text class="section-count">{{item.records.length}} 条</text>
+      </view>
+      <view wx:for="{{item.records}}" wx:for-item="record" wx:key="id" class="record-card" data-id="{{record.id}}" bindtap="openDetail">
+        <image wx:if="{{record.images.length}}" class="record-image" src="{{record.images[0]}}" mode="aspectFill"></image>
+        <view wx:else class="record-cover">
+          <view class="record-dish"><text>{{record.coverText}}</text></view>
+        </view>
+        <view class="record-main">
+          <view class="record-top">
+            <text class="record-name">{{record.foodName}}</text>
+            <text class="record-meal">{{record.mealLabel}}</text>
+          </view>
+          <text class="record-stars">{{record.starText}}</text>
+          <text class="record-comment">{{record.comment || '还没有写评价'}}</text>
+          <view class="tag-row">
+            <text wx:for="{{record.tags}}" wx:key="*this" class="tag">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view class="floating-add" bindtap="openAdd">＋</view>
+</view>

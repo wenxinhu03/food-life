@@ -1,0 +1,69 @@
+<view class="page-shell edit-page">
+  <view class="header-card" bindtap="chooseImage">
+    <image wx:if="{{record.images.length}}" class="food-image" src="{{record.images[0]}}" mode="aspectFill"></image>
+    <view wx:else class="dish-art">
+      <view class="dish-plate"></view>
+      <view class="dish-food"></view>
+      <view class="dish-dot dot-one"></view>
+      <view class="dish-dot dot-two"></view>
+    </view>
+    <text class="header-title">{{isEdit ? '编辑记录' : '添加食物'}}</text>
+    <text class="header-subtitle">写下今天这一口的味道</text>
+  </view>
+
+  <view class="form-card">
+    <view class="field">
+      <text class="label">食物名称</text>
+      <input class="input" value="{{record.foodName}}" placeholder="例如 番茄牛腩饭" bindinput="onFoodNameInput" />
+    </view>
+
+    <view class="field">
+      <text class="label">日期</text>
+      <picker mode="date" value="{{record.date}}" bindchange="onDateChange">
+        <view class="picker-field">{{record.date}}</view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <text class="label">餐次</text>
+      <view class="chip-row">
+        <view wx:for="{{mealOptions}}" wx:key="key" class="chip {{record.mealType === item.key ? 'chip-active' : ''}}" data-meal="{{item.key}}" bindtap="selectMeal">{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="label">评分</text>
+      <view class="rating-row">
+        <view wx:for="{{ratingOptions}}" wx:key="value" class="star {{item.active ? 'star-active' : ''}}" data-rating="{{item.value}}" bindtap="selectRating">★</view>
+        <text class="rating-copy">{{record.rating}} 分</text>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="label">标签</text>
+      <view class="chip-row">
+        <view wx:for="{{selectableTags}}" wx:key="label" class="chip {{item.active ? 'chip-active' : ''}}" data-tag="{{item.label}}" bindtap="toggleTag">{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="label-row">
+        <text class="label">评价</text>
+        <view class="ai-link" bindtap="generateComment">AI 草稿</view>
+      </view>
+      <textarea class="textarea" value="{{record.comment}}" maxlength="300" placeholder="写下今天的味道..." bindinput="onCommentInput"></textarea>
+    </view>
+
+    <view class="field">
+      <text class="label">地点</text>
+      <input class="input" value="{{record.location}}" placeholder="可选" bindinput="onLocationInput" />
+    </view>
+
+    <view class="field">
+      <text class="label">价格</text>
+      <input class="input" type="digit" value="{{record.price}}" placeholder="可选" bindinput="onPriceInput" />
+    </view>
+  </view>
+
+  <view class="primary-button save-button" bindtap="save">保存记录</view>
+</view>

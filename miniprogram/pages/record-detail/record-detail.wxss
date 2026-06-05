@@ -1,0 +1,168 @@
+.detail-page {
+  min-height: 100vh;
+  background: #f3f7f8;
+}
+
+.hero-card {
+  height: 430rpx;
+  background: #fff4dc;
+  overflow: hidden;
+}
+
+.hero-image,
+.hero-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-dish {
+  position: relative;
+  width: 360rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.big-food {
+  position: absolute;
+  left: 90rpx;
+  top: 42rpx;
+  width: 180rpx;
+  height: 112rpx;
+  border-radius: 999rpx;
+  background: #ffc857;
+  border: 8rpx solid #ff9f43;
+}
+
+.big-dot {
+  position: absolute;
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  background: #ff6b57;
+}
+
+.dot-a {
+  left: 142rpx;
+  top: 72rpx;
+}
+
+.dot-b {
+  right: 126rpx;
+  top: 104rpx;
+}
+
+.content {
+  margin-top: -34rpx;
+  padding-top: 34rpx;
+  border-radius: 36rpx 36rpx 0 0;
+  background: #f3f7f8;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24rpx;
+}
+
+.food-name {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 700;
+}
+
+.meta {
+  display: block;
+  margin-top: 12rpx;
+  color: #7c8b8f;
+  font-size: 24rpx;
+}
+
+.rating {
+  color: #12b89f;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.stars {
+  display: block;
+  margin-top: 18rpx;
+  color: #ffc857;
+  font-size: 32rpx;
+}
+
+.section-card {
+  margin-top: 24rpx;
+  padding: 28rpx;
+  border-radius: 28rpx;
+  background: #ffffff;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.comment {
+  display: block;
+  margin-top: 16rpx;
+  color: #334e52;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+
+.tag-row {
+  margin-top: 18rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+
+.tag {
+  height: 52rpx;
+  padding: 0 22rpx;
+  border-radius: 999rpx;
+  background: #ddf7f1;
+  color: #0d9f8b;
+  font-size: 24rpx;
+  display: inline-flex;
+  align-items: center;
+}
+
+.info-row {
+  margin-top: 18rpx;
+  display: flex;
+  justify-content: space-between;
+  color: #334e52;
+  font-size: 26rpx;
+}
+
+.info-row text:first-child {
+  color: #7c8b8f;
+}
+
+.action-row {
+  margin: 34rpx 0 8rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+}
+
+.delete-button {
+  height: 88rpx;
+  border-radius: 999rpx;
+  background: #fff0ee;
+  color: #ff6b57;
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/record-edit/record-edit",
+    "pages/record-detail/record-detail",
+    "pages/ai-summary/ai-summary"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "default",
+    "navigationBarTitleText": "味道日记",
+    "navigationBarBackgroundColor": "#F3F7F8",
+    "backgroundColor": "#F3F7F8"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,46 @@
+<view wx:if="{{record}}" class="detail-page">
+  <view class="hero-card">
+    <image wx:if="{{record.images.length}}" class="hero-image" src="{{record.images[0]}}" mode="aspectFill"></image>
+    <view wx:else class="hero-cover">
+      <view class="big-dish">
+        <view class="big-food"></view>
+        <view class="big-dot dot-a"></view>
+        <view class="big-dot dot-b"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="content page-shell">
+    <view class="title-row">
+      <view>
+        <text class="food-name">{{record.foodName}}</text>
+        <text class="meta">{{record.date}} · {{record.mealLabel}}</text>
+      </view>
+      <text class="rating">{{record.rating}} 分</text>
+    </view>
+    <text class="stars">{{record.starText}}</text>
+
+    <view class="section-card">
+      <text class="section-title">我的评价</text>
+      <text class="comment">{{record.comment || '还没有写评价'}}</text>
+    </view>
+
+    <view wx:if="{{record.tags.length}}" class="section-card">
+      <text class="section-title">标签</text>
+      <view class="tag-row">
+        <text wx:for="{{record.tags}}" wx:key="*this" class="tag">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="section-card">
+      <text class="section-title">更多信息</text>
+      <view class="info-row"><text>地点</text><text>{{record.location || '未填写'}}</text></view>
+      <view class="info-row"><text>价格</text><text>{{record.price ? '¥' + record.price : '未填写'}}</text></view>
+    </view>
+
+    <view class="action-row">
+      <view class="secondary-button" bindtap="editRecord">编辑</view>
+      <view class="delete-button" bindtap="deleteRecord">删除</view>
+    </view>
+  </view>
+</view>
